@@ -1,0 +1,32 @@
+
+name: Build Loop
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildType:
+        description: 'Build type'
+        required: true
+        default: 'TestFlight'
+        type: choice
+        options:
+          - TestFlight
+          - AdHoc
+      email:
+        description: 'Apple Developer Email'
+        required: true
+        default: ''
+      githubToken:
+        description: 'GitHub Personal Access Token (PAT)'
+        required: false
+        default: ''
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - uses: LoopKit/actions/build-loop@main
+        with:
+          buildType: ${{ github.event.inputs.buildType }}
+          email: ${{ github.event.inputs.email }}
+          githubToken: ${{ github.event.inputs.githubToken }}
