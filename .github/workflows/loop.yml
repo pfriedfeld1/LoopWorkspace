@@ -25,7 +25,8 @@ jobs:
   build:
     runs-on: macos-13
     steps:
-      - uses: LoopKit/actions-build-loop@main
+      - uses: LoopKit/build-loop-action@main
+
         with:
           buildType: ${{ github.event.inputs.buildType }}
           email: ${{ github.event.inputs.email }}
